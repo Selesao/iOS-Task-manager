@@ -64,7 +64,7 @@
     NAATaskCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NAATaskCell" forIndexPath:indexPath];
     NSArray *tasks = [[NAATaskStore sharedStore] allTasks];
     NAATask *task = tasks[indexPath.row];
-    cell.titleLabel.text = task.name;
+    cell.titleLabel.text = task.title;
     //Format date for user output
     static NSDateFormatter *dateFormatterDay;
     if (!dateFormatterDay) {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84255F4D19EAB7180063AE5C /* NAATask.m in Sources */ = {isa = PBXBuildFile; fileRef = 84255F4C19EAB7180063AE5C /* NAATask.m */; };
 		843BA43D19E9468000D3AA4F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843BA43C19E9468000D3AA4F /* Foundation.framework */; };
 		843BA43F19E9468000D3AA4F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843BA43E19E9468000D3AA4F /* CoreGraphics.framework */; };
 		843BA44119E9468000D3AA4F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843BA44019E9468000D3AA4F /* UIKit.framework */; };
@@ -19,8 +20,6 @@
 		843BA45819E9468000D3AA4F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843BA44019E9468000D3AA4F /* UIKit.framework */; };
 		843BA46019E9468000D3AA4F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 843BA45E19E9468000D3AA4F /* InfoPlist.strings */; };
 		843BA46219E9468000D3AA4F /* Task_managerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 843BA46119E9468000D3AA4F /* Task_managerTests.m */; };
-		843BA47219E96C0400D3AA4F /* TaskManager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 843BA47019E96C0400D3AA4F /* TaskManager.xcdatamodeld */; };
-		843BA47519E97B1200D3AA4F /* NAATask.m in Sources */ = {isa = PBXBuildFile; fileRef = 843BA47419E97B1200D3AA4F /* NAATask.m */; };
 		843BA47819E9808E00D3AA4F /* NAATaskStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 843BA47719E9808E00D3AA4F /* NAATaskStore.m */; };
 		843BA47A19E98D0B00D3AA4F /* NAADateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843BA47919E98D0B00D3AA4F /* NAADateCell.xib */; };
 		843BA47D19E998FB00D3AA4F /* NAAReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843BA47C19E998FB00D3AA4F /* NAAReminderViewController.m */; };
@@ -40,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84255F4B19EAB7180063AE5C /* NAATask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAATask.h; sourceTree = "<group>"; };
+		84255F4C19EAB7180063AE5C /* NAATask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NAATask.m; sourceTree = "<group>"; };
 		843BA43919E9468000D3AA4F /* Task manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Task manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		843BA43C19E9468000D3AA4F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		843BA43E19E9468000D3AA4F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -56,9 +57,6 @@
 		843BA45D19E9468000D3AA4F /* Task managerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Task managerTests-Info.plist"; sourceTree = "<group>"; };
 		843BA45F19E9468000D3AA4F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		843BA46119E9468000D3AA4F /* Task_managerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Task_managerTests.m; sourceTree = "<group>"; };
-		843BA47119E96C0400D3AA4F /* TaskManager.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskManager.xcdatamodel; sourceTree = "<group>"; };
-		843BA47319E97B1200D3AA4F /* NAATask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAATask.h; sourceTree = "<group>"; };
-		843BA47419E97B1200D3AA4F /* NAATask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NAATask.m; sourceTree = "<group>"; };
 		843BA47619E9808E00D3AA4F /* NAATaskStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAATaskStore.h; sourceTree = "<group>"; };
 		843BA47719E9808E00D3AA4F /* NAATaskStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NAATaskStore.m; sourceTree = "<group>"; };
 		843BA47919E98D0B00D3AA4F /* NAADateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NAADateCell.xib; sourceTree = "<group>"; };
@@ -135,8 +133,8 @@
 				843BA47C19E998FB00D3AA4F /* NAAReminderViewController.m */,
 				843BA48319E9C14300D3AA4F /* NAATaskDetailViewR.h */,
 				843BA48419E9C14300D3AA4F /* NAATaskDetailViewR.m */,
-				843BA47319E97B1200D3AA4F /* NAATask.h */,
-				843BA47419E97B1200D3AA4F /* NAATask.m */,
+				84255F4B19EAB7180063AE5C /* NAATask.h */,
+				84255F4C19EAB7180063AE5C /* NAATask.m */,
 				843BA47E19E99F2300D3AA4F /* NAATaskCell.h */,
 				843BA47F19E99F2300D3AA4F /* NAATaskCell.m */,
 				843BA48119E9A4DF00D3AA4F /* NAATaskCell.xib */,
@@ -144,7 +142,6 @@
 				843BA47719E9808E00D3AA4F /* NAATaskStore.m */,
 				843BA44E19E9468000D3AA4F /* Images.xcassets */,
 				843BA44319E9468000D3AA4F /* Supporting Files */,
-				843BA47019E96C0400D3AA4F /* TaskManager.xcdatamodeld */,
 			);
 			path = "Task manager";
 			sourceTree = "<group>";
@@ -276,13 +273,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				843BA47519E97B1200D3AA4F /* NAATask.m in Sources */,
+				84255F4D19EAB7180063AE5C /* NAATask.m in Sources */,
 				843BA47819E9808E00D3AA4F /* NAATaskStore.m in Sources */,
 				843BA48519E9C14300D3AA4F /* NAATaskDetailViewR.m in Sources */,
 				843BA44919E9468000D3AA4F /* main.m in Sources */,
 				843BA48019E99F2300D3AA4F /* NAATaskCell.m in Sources */,
 				843BA44D19E9468000D3AA4F /* NAAAppDelegate.m in Sources */,
-				843BA47219E96C0400D3AA4F /* TaskManager.xcdatamodeld in Sources */,
 				843BA47D19E998FB00D3AA4F /* NAAReminderViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -480,6 +476,7 @@
 				843BA46719E9468000D3AA4F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		843BA46819E9468000D3AA4F /* Build configuration list for PBXNativeTarget "Task managerTests" */ = {
 			isa = XCConfigurationList;
@@ -488,21 +485,9 @@
 				843BA46A19E9468000D3AA4F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		843BA47019E96C0400D3AA4F /* TaskManager.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				843BA47119E96C0400D3AA4F /* TaskManager.xcdatamodel */,
-			);
-			currentVersion = 843BA47119E96C0400D3AA4F /* TaskManager.xcdatamodel */;
-			path = TaskManager.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 843BA43119E9468000D3AA4F /* Project object */;
 }

@@ -49,7 +49,7 @@
 - (NSArray *)allTasks
 {
     NAATask *newTask = [[NAATask alloc] init];
-    newTask.name = @"My name";
+    newTask.title = @"My name";
     newTask.fromDate = [NSDate date];
     newTask.toDate = [NSDate date];
     NSArray *newArray = @[newTask];

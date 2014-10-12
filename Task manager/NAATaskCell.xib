@@ -35,7 +35,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="dayLabel" destination="zUr-qj-COg" id="B9E-Wl-2nr"/>
-                <outlet property="tiemLabel" destination="BWM-wC-pkh" id="MRe-Jc-n0X"/>
+                <outlet property="timeLabel" destination="BWM-wC-pkh" id="icf-YE-VIp"/>
                 <outlet property="titleLabel" destination="an9-L9-P4q" id="SnV-NZ-XYO"/>
             </connections>
         </tableViewCell>
