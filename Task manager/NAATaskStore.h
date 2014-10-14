@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NAATask.h"
 
 @interface NAATaskStore : NSObject
 
@@ -18,6 +19,7 @@
 
 
 + (instancetype)sharedStore;
-
+- (NAATask *)createTask;
+- (void)removeTask:(NAATask *)taskToRemove;
 
 @end

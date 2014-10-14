@@ -8,6 +8,7 @@
 
 #import "NAAAppDelegate.h"
 #import "NAAReminderViewController.h"
+#import "NAATaskDetailViewR.h"
 
 @implementation NAAAppDelegate
 
@@ -17,7 +18,8 @@
     
     // Override point for customization after application launch.
     NAAReminderViewController *reminderViewController = [[NAAReminderViewController alloc] init];
-    self.window.rootViewController = reminderViewController;
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:reminderViewController];
+    self.window.rootViewController = navController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

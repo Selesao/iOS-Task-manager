@@ -7,7 +7,7 @@
 //
 
 #import "NAATaskStore.h"
-#import "NAATask.h"
+
 
 @interface NAATaskStore()
 
@@ -42,19 +42,26 @@
 - (instancetype)initPrivate
 {
     self = [super init];
+    _privateTasks = [[NSMutableArray alloc] init];
 
     return self;
 }
 
 - (NSArray *)allTasks
 {
+    return [self.privateTasks copy];
+}
+
+- (NAATask *)createTask
+{
     NAATask *newTask = [[NAATask alloc] init];
-    newTask.title = @"My name";
-    newTask.fromDate = [NSDate date];
-    newTask.toDate = [NSDate date];
-    NSArray *newArray = @[newTask];
-    return newArray;
-//    return [self.privateTasks copy];
+    [self.privateTasks addObject:newTask];
+    return newTask;
+}
+
+- (void)removeTask:(NAATask *)taskToRemove
+{
+    [self.privateTasks removeObjectIdenticalTo:taskToRemove];
 }
 
 

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NAATask.h"
 
 @interface NAATaskDetailViewR : UITableViewController
+
+@property (nonatomic, strong) NAATask* task;
+@property (nonatomic) BOOL isNew;
 
 @end
