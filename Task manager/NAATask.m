@@ -8,6 +8,10 @@
 
 #import "NAATask.h"
 
+@interface NAATask ()<NSCoding>
+
+@end
+
 @implementation NAATask
 
 - (instancetype)init
@@ -28,6 +32,29 @@
         self.title = title;
         self.fromDate = fromDate;
         self.toDate = toDate;
+    }
+    return self;
+}
+#pragma mark -NSCoding protocol
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.title forKey:@"taskTitle"];
+    [aCoder encodeObject:self.fromDate forKey:@"fromDate"];
+    [aCoder encodeObject:self.toDate forKey:@"toDate"];
+    [aCoder encodeObject:self.notification forKey:@"notification"];
+    [aCoder encodeBool:self.remind forKey:@"remind"];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    if (self) {
+        _title = [aDecoder decodeObjectForKey:@"taskTitle"];
+        _fromDate = [aDecoder decodeObjectForKey:@"fromDate"];
+        _toDate = [aDecoder decodeObjectForKey:@"toDate"];
+        _notification = [aDecoder decodeObjectForKey:@"notification"];
+        _remind = [aDecoder decodeBoolForKey:@"remind"];
     }
     return self;
 }

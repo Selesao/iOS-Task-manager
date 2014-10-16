@@ -24,9 +24,9 @@
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.dateStyle = NSDateFormatterMediumStyle;
     self.dateFormatter.timeStyle = NSDateFormatterShortStyle;
-    self.dateText.text = [self.dateFormatter stringFromDate:[NSDate date]];
     
 }
+
 
 - (IBAction)datePIcked:(id)sender {
     self.dateText.text = [self.dateFormatter stringFromDate:self.datePicker.date];

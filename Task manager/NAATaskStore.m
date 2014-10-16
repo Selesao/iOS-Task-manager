@@ -42,8 +42,13 @@
 - (instancetype)initPrivate
 {
     self = [super init];
-    _privateTasks = [[NSMutableArray alloc] init];
-
+    if (self) {
+        NSString *path = [self taskArchivePath];
+        _privateTasks = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        if (!_privateTasks) {
+            _privateTasks = [[NSMutableArray alloc] init];
+        }
+    }
     return self;
 }
 
@@ -62,6 +67,24 @@
 - (void)removeTask:(NAATask *)taskToRemove
 {
     [self.privateTasks removeObjectIdenticalTo:taskToRemove];
+}
+
+
+#pragma mark -Archiving methods
+- (NSString *)taskArchivePath
+{
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [documentDirectories firstObject];
+    
+    return [documentDirectory stringByAppendingPathComponent:@"tasks.archive"];
+}
+
+- (BOOL)saveChanges
+{
+    NSString *path = [self taskArchivePath];
+    
+    return [NSKeyedArchiver archiveRootObject:self.privateTasks toFile:path];
+    
 }
 
 

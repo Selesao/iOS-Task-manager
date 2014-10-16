@@ -36,14 +36,7 @@
     UINib *nib = [UINib nibWithNibName:@"NAADateCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"NAADateCell"];
     [self.tableView registerClass:[NAATextFieldCell class] forCellReuseIdentifier:@"NAATextFieldCell"];
-    
-    
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,12 +78,16 @@
         switch (indexPath.row) {
             case 0:
                 cell.dateLabel.text = @"Starts";
+                cell.datePicker.date = self.task.fromDate;
+                cell.dateText.text = [cell.dateFormatter stringFromDate:cell.datePicker.date];
                 cell.actionBlock = ^{
                     NSLog(@"Wow!So rolling!Much date!");
                 };
                 break;
             case 1:
                 cell.dateLabel.text = @"Ends";
+                cell.datePicker.date = self.task.toDate;
+                cell.dateText.text = [cell.dateFormatter stringFromDate:cell.datePicker.date];
                 break;
         }
         
@@ -157,7 +154,7 @@
     [textField resignFirstResponder];
     return NO;
 }
-
+#pragma mark -Naviagation bar action methods
 - (void)saveTask
 {
     NSIndexPath *textCellIndex = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -167,9 +164,20 @@
     NAATextFieldCell *textCell = (NAATextFieldCell *) [self.tableView cellForRowAtIndexPath:textCellIndex];
     NAADateCell *fromDateCell = (NAADateCell *) [self.tableView cellForRowAtIndexPath:fromDateCellIndex];
     NAADateCell *toDateCell = (NAADateCell *) [self.tableView cellForRowAtIndexPath:toDateCellIndex];
-    self.task.title = textCell.textField.text;
+    if (![textCell.textField.text isEqualToString:@""]) {
+        self.task.title = textCell.textField.text;
+    }
     self.task.fromDate = fromDateCell.datePicker.date;
     self.task.toDate = toDateCell.datePicker.date;
+    
+    //Adding notification
+    UILocalNotification *taskNotification = self.task.notification;
+    taskNotification = [[UILocalNotification alloc] init];
+    taskNotification.alertBody = self.task.title;
+    taskNotification.fireDate = self.task.fromDate;
+    taskNotification.soundName = UILocalNotificationDefaultSoundName;
+    taskNotification.alertAction = self.task.title;
+    [[UIApplication sharedApplication] scheduleLocalNotification:taskNotification];
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     
 }
@@ -182,56 +190,5 @@
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

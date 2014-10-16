@@ -11,9 +11,9 @@
 @interface NAATask : NSObject
 
 @property (nonatomic, strong) NSString* title;
-@property (nonatomic, strong) NSDate *fromDate;
-@property (nonatomic, strong) NSDate *toDate;
+@property (nonatomic, strong) NSDate* fromDate;
+@property (nonatomic, strong) NSDate* toDate;
 @property (nonatomic) BOOL remind;
-
+@property (nonatomic, strong) UILocalNotification* notification;
 
 @end

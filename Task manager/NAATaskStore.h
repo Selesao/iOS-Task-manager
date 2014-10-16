@@ -21,5 +21,6 @@
 + (instancetype)sharedStore;
 - (NAATask *)createTask;
 - (void)removeTask:(NAATask *)taskToRemove;
+-(BOOL)saveChanges;
 
 @end
