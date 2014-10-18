@@ -11,7 +11,7 @@
 
 @interface NAATaskDetailViewR : UITableViewController
 
-@property (nonatomic, strong) NAATask* task;
+@property (nonatomic, weak) NAATask* task;
 @property (nonatomic) BOOL isNew;
 
 @end

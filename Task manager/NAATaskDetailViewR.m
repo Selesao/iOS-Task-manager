@@ -12,8 +12,7 @@
 #import "NAATaskStore.h"
 @interface NAATaskDetailViewR () <UITextFieldDelegate>
 
-- (void)saveTask;
-- (void)cancelChanges;
+@property (nonatomic) NSTimeInterval taskDuration;
 
 @end
 
@@ -36,6 +35,7 @@
     UINib *nib = [UINib nibWithNibName:@"NAADateCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"NAADateCell"];
     [self.tableView registerClass:[NAATextFieldCell class] forCellReuseIdentifier:@"NAATextFieldCell"];
+    self.taskDuration = [self.task.toDate timeIntervalSinceDate:self.task.fromDate];
 
 }
 
@@ -77,18 +77,50 @@
         NAADateCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NAADateCell" forIndexPath:indexPath];
         switch (indexPath.row) {
             case 0:
+            {
                 cell.dateLabel.text = @"Starts";
                 cell.datePicker.date = self.task.fromDate;
                 cell.dateText.text = [cell.dateFormatter stringFromDate:cell.datePicker.date];
+                
+                //Presetving same task duration
                 cell.actionBlock = ^{
-                    NSLog(@"Wow!So rolling!Much date!");
+                    NSIndexPath *fromDateCellIndex = [NSIndexPath indexPathForRow:0 inSection:1];
+                    NSIndexPath *toDateCellIndex = [NSIndexPath indexPathForRow:1 inSection:1];
+                    
+                    NAADateCell *fromDateCell = (NAADateCell *) [self.tableView cellForRowAtIndexPath:fromDateCellIndex];
+                    NAADateCell *toDateCell = (NAADateCell *) [self.tableView cellForRowAtIndexPath:toDateCellIndex];
+                    toDateCell.datePicker.date = [fromDateCell.datePicker.date dateByAddingTimeInterval:self.taskDuration];
+                    toDateCell.dateText.text = [toDateCell.dateFormatter stringFromDate:toDateCell.datePicker.date];
+
+                    NSLog(@"%f", self.taskDuration);
                 };
                 break;
+            }
             case 1:
+            {
                 cell.dateLabel.text = @"Ends";
                 cell.datePicker.date = self.task.toDate;
                 cell.dateText.text = [cell.dateFormatter stringFromDate:cell.datePicker.date];
+                
+
+                cell.actionBlock = ^{
+                    NSIndexPath *fromDateCellIndex = [NSIndexPath indexPathForRow:0 inSection:1];
+                    NSIndexPath *toDateCellIndex = [NSIndexPath indexPathForRow:1 inSection:1];
+                    
+                    NAADateCell *fromDateCell = (NAADateCell *) [self.tableView cellForRowAtIndexPath:fromDateCellIndex];
+                    NAADateCell *toDateCell = (NAADateCell *) [self.tableView cellForRowAtIndexPath:toDateCellIndex];
+                    //Preventing negative task duration
+                    if ([fromDateCell.datePicker.date compare:toDateCell.datePicker.date] == NSOrderedDescending) {
+                        fromDateCell.datePicker.date = toDateCell.datePicker.date;
+                        fromDateCell.dateText.text = [fromDateCell.dateFormatter stringFromDate:fromDateCell.datePicker.date];
+                        
+                    }
+                    //Update new task duration
+                    self.taskDuration = [toDateCell.datePicker.date timeIntervalSinceDate:fromDateCell.datePicker.date];
+                    NSLog(@"%f", self.taskDuration);
+                };
                 break;
+            }
         }
         
         return cell;
