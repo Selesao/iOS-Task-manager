@@ -21,6 +21,7 @@
 + (instancetype)sharedStore;
 - (NAATask *)createTask;
 - (void)removeTask:(NAATask *)taskToRemove;
--(BOOL)saveChanges;
+- (BOOL)saveChanges;
+- (NSArray *)tasksInWeekday:(int)weekdayNum;
 
 @end

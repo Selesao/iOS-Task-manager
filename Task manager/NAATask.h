@@ -15,5 +15,6 @@
 @property (nonatomic, strong) NSDate* toDate;
 @property (nonatomic) BOOL remind;
 @property (nonatomic, strong) UILocalNotification* notification;
+@property (nonatomic) NSInteger weekday;
 
 @end

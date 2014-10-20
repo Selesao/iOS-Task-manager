@@ -87,6 +87,11 @@
     
 }
 
-
+- (NSArray *)tasksInWeekday:(int)weekdayNum
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"weekday == %i", weekdayNum];
+    return [self.allTasks filteredArrayUsingPredicate:predicate];
+    
+}
 
 @end

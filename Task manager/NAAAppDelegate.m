@@ -10,6 +10,7 @@
 #import "NAAReminderViewController.h"
 #import "NAATaskDetailViewR.h"
 #import "NAATaskStore.h"
+#import "NAAScheduleViewController.h"
 
 @implementation NAAAppDelegate
 
@@ -18,9 +19,14 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // Override point for customization after application launch.
-    NAAReminderViewController *reminderViewController = [[NAAReminderViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:reminderViewController];
-    self.window.rootViewController = navController;
+    NAAReminderViewController *rvc = [[NAAReminderViewController alloc] init];
+    UINavigationController *remNavController = [[UINavigationController alloc] initWithRootViewController:rvc];
+    NAAScheduleViewController *svc = [[NAAScheduleViewController alloc] init];
+    UINavigationController *schNavController = [[UINavigationController alloc] initWithRootViewController:svc];
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers = @[remNavController, schNavController];
+    
+    self.window.rootViewController = tabBarController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

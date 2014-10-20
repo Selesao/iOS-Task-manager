@@ -10,6 +10,8 @@
 
 @interface NAATask ()<NSCoding>
 
+@property (nonatomic, strong) NSCalendar* calendar;
+
 @end
 
 @implementation NAATask
@@ -32,6 +34,8 @@
         self.title = title;
         self.fromDate = fromDate;
         self.toDate = toDate;
+        self.calendar = [[NSCalendar alloc]
+                         initWithCalendarIdentifier:NSGregorianCalendar];
     }
     return self;
 }
@@ -59,4 +63,14 @@
     return self;
 }
 
+
+- (void)setFromDate:(NSDate *)fromDate
+{
+    _fromDate = fromDate;
+    NSDateComponents *weekdayComponents = [self.calendar components:NSWeekdayCalendarUnit fromDate:fromDate];
+    self.weekday = [weekdayComponents weekday];
+    NSLog(@"Weekday: %i", self.weekday);
+    
+    
+}
 @end

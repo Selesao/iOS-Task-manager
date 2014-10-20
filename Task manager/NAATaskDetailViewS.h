@@ -1,13 +1,13 @@
 //
-//  NAATaskDetailViewR.m
+//  NAATaskDetailViewS.h
 //  Task manager
 //
 //  Created by Admin on 20.10.14.
 //  Copyright (c) 2014 PlaceHolder. All rights reserved.
 //
 
-#import "NAATaskDetailViewR.h"
+#import "NAATaskDetailView.h"
 
-@implementation NAATaskDetailViewR
+@interface NAATaskDetailViewS : NAATaskDetailView
 
 @end

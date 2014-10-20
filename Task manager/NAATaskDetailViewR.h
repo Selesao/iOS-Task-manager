@@ -2,16 +2,13 @@
 //  NAATaskDetailViewR.h
 //  Task manager
 //
-//  Created by Admin on 11.10.14.
+//  Created by Admin on 20.10.14.
 //  Copyright (c) 2014 PlaceHolder. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "NAATask.h"
+#import "NAATaskDetailView.h"
 
-@interface NAATaskDetailViewR : UITableViewController
-
-@property (nonatomic, weak) NAATask* task;
-@property (nonatomic) BOOL isNew;
+@interface NAATaskDetailViewR : NAATaskDetailView
 
 @end

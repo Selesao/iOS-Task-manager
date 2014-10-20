@@ -1,25 +1,25 @@
 //
-//  NAAReminderViewController.m
+//  NAAScheduleViewController.m
 //  Task manager
 //
-//  Created by Admin on 11.10.14.
+//  Created by Admin on 19.10.14.
 //  Copyright (c) 2014 PlaceHolder. All rights reserved.
 //
 
-#import "NAAReminderViewController.h"
+#import "NAAScheduleViewController.h"
 #import "NAATaskStore.h"
 #import "NAATaskCell.h"
-#import "NAATaskDetailViewR.h"
 
-@interface NAAReminderViewController ()
+
+@interface NAAScheduleViewController ()
 
 @end
 
-@implementation NAAReminderViewController
+@implementation NAAScheduleViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithStyle:style];
+    self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         //Setting up navigation bar
         UINavigationItem *navItem = self.navigationItem;
@@ -30,8 +30,8 @@
                                     action:@selector(addTask)];
         navItem.rightBarButtonItem = addTask;
         
-        self.tabBarItem.title = @"Reminder";
-        UIImage *i = [UIImage imageNamed:@"Reminder.png"];
+        self.tabBarItem.title = @"Schedule";
+        UIImage *i = [UIImage imageNamed:@"Schedule.png"];
         self.tabBarItem.image = i;
     }
     return self;
@@ -42,7 +42,6 @@
     [super viewDidLoad];
     UINib *nib = [UINib nibWithNibName:@"NAATaskCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"NAATaskCell"];
-    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -60,20 +59,23 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    // Return the number of sections.
+    return 7;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[NAATaskStore sharedStore] allTasks] count];
-
+    //NSDateComponents weekday return 1 for Sunday, but I need Monday to be the first day of week.
+    NSInteger weekday = [self weekdayForSection:section];
+    return [[[NAATaskStore sharedStore] tasksInWeekday:weekday] count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NAATaskCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NAATaskCell" forIndexPath:indexPath];
-    NSArray *tasks = [[NAATaskStore sharedStore] allTasks];
+    NSInteger weekday = [self weekdayForSection:indexPath.section];
+    NSArray *tasks = [[NAATaskStore sharedStore] tasksInWeekday:weekday];
     NAATask *task = tasks[indexPath.row];
     cell.titleLabel.text = task.title;
     //Format date for user output
@@ -92,10 +94,28 @@
     cell.dayLabel.text = [dateFormatterDay stringFromDate:task.fromDate];
     cell.timeLabel.text = [dateFormatterTime stringFromDate:task.fromDate];
     
-    
     return cell;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+
+        NSArray *sectionNames = @[@"Monday", @"Tuesday", @"Wednesday", @"Thursday",
+                                  @"Friday", @"Saturday", @"Sunday"];
+        return sectionNames[section];
+}
+
+- (NSInteger)weekdayForSection:(NSInteger)section
+{
+    NSInteger weekday;
+    if (section < 6) {
+        weekday = section + 2;
+    } else if (section == 6){
+        weekday = 1;
+    }
+    return weekday;
+}
+/*
 - (void)addTask
 {
     NAATask *newTask = [[NAATaskStore sharedStore] createTask];
@@ -108,35 +128,13 @@
     [self presentViewController:navController animated:YES completion:nil];
     
 }
-
-
+*/
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSArray *allTasks = [[NAATaskStore sharedStore] allTasks];
-    NAATask *selectedTask = allTasks[indexPath.row];
-    NAATaskDetailViewR *detailView = [[NAATaskDetailViewR alloc] init];
-    detailView.task = selectedTask;
-    UINavigationController *navController = [[UINavigationController alloc]
-                                             initWithRootViewController:detailView];
-    
-    [self presentViewController:navController animated:YES completion:nil];
-}
-
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSArray *allTasks = [[NAATaskStore sharedStore] allTasks];
-        NAATask *taskToDelete = allTasks[indexPath.row];
-        [[NAATaskStore sharedStore] removeTask:taskToDelete];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
-}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
