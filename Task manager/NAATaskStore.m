@@ -31,6 +31,8 @@
     
 }
 
+//some awesome master changes
+
 - (instancetype)init
 {
     @throw [NSException exceptionWithName:@"Singleton" reason:@"Use + [NAATaskStore sharedStore]" userInfo:nil];
